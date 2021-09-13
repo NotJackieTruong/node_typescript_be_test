@@ -38,6 +38,7 @@ app.use(function (req: any, res: any, next: any) {
 });
 app.use(cors())
 app.use(router)
+app.use(express.static(path.join(__dirname, 'public')))
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../public')))
   app.use(express.static(path.join(__dirname, '../build')))
@@ -45,12 +46,6 @@ if (process.env.NODE_ENV === 'production') {
     res.sendFile(path.join(__dirname, '../build/index.html'))
   })
 }
-
-app.use(express.static(path.join(__dirname, 'public')))
-app.use(express.static(path.join(__dirname, 'build')))
-app.use("*", (req: Request, res: Response) => {
-  res.sendFile(path.join(__dirname, 'build/index.html'))
-})
 
 // mongoose
 mongoose.connect(mongooseUrl, { useNewUrlParser: true, useUnifiedTopology: true })
