@@ -22,7 +22,7 @@ const networkInterfaces = os.networkInterfaces()
 
 const ipAddress = Utils.getIpAddress(networkInterfaces)
 const port = process.env.PORT || 3000
-const mongooseUrl = process.env.MONGOOSE_CONNECTION_STRING
+const mongooseUrl = process.env.MONGOOSE_CONNECTION_STRING||"mongodb://localhost:27017/node_typescript_test"
 const serverUrl = `http://${ipAddress}:${port}`
 const io = socket(server)
 
