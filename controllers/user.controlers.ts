@@ -32,12 +32,6 @@ const signup = async (req: Request, res: Response, next?: NextFunction) => {
           token
         }
       })
-    }).catch((error: any) => {
-      res.send({
-        message: error.message,
-        success: false,
-        data: {}
-      })
     })
 
 
