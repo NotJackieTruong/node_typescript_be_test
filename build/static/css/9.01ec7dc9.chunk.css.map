@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack://src/views/app-views/profile/index.css"],"names":[],"mappings":"AAAA,yCACI,qBAAyB,CACzB,UACJ","file":"9.01ec7dc9.chunk.css","sourcesContent":[".ant-input-disabled, .ant-input[disabled] {\r\n    background-color: #ffffff;\r\n    color: #000;\r\n}\r\n\r\n.avatar-cropper-container{\r\n\r\n}\r\n"]}
