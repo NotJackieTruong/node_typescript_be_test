@@ -43,7 +43,7 @@ const signup = async (req: Request, res: Response, next?: NextFunction) => {
 
   } catch (e) {
     res.send({
-      message: e,
+      message: "Error while signing up"+e,
       success: false,
       data: {}
     })
@@ -90,7 +90,7 @@ const login = async (req: Request, res: Response, next?: NextFunction) => {
     })
   } catch (e) {
     res.send({
-      message: e,
+      message: "Error while logging in"+e,
       success: false,
       data: {}
     })
