@@ -1,4 +1,5 @@
-export {}
+export { }
+import { Request, Response } from 'express'
 const express = require('express')
 const http = require('http')
 const router = require('./routes/index')
@@ -20,12 +21,12 @@ const server = http.createServer(app)
 const networkInterfaces = os.networkInterfaces()
 
 const ipAddress = Utils.getIpAddress(networkInterfaces)
-const port = process.env.PORT||3000
+const port = process.env.PORT || 3000
 const mongooseUrl = process.env.MONGOOSE_CONNECTION_STRING
 const serverUrl = `http://${ipAddress}:${port}`
 const io = socket(server)
 
-app.use(bodyParser.urlencoded({extended: true}))
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.use(cookieParser())
 app.use(function (req: any, res: any, next: any) {
@@ -37,15 +38,22 @@ app.use(function (req: any, res: any, next: any) {
 });
 app.use(cors())
 app.use(router)
-app.use(express.static(path.join(__dirname, '../public')))
-
-// heroku
-if(process.env.NODE_ENV === 'production'){
-  app.use(express.static(path.join(__dirname, '../client/build')))
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../public')))
+  app.use(express.static(path.join(__dirname, '../build')))
+  app.use("*", (req: Request, res: Response) => {
+    res.sendFile(path.join(__dirname, '../build/index.html'))
+  })
 }
 
+app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.static(path.join(__dirname, 'build')))
+app.use("*", (req: Request, res: Response) => {
+  res.sendFile(path.join(__dirname, 'build/index.html'))
+})
+
 // mongoose
-mongoose.connect(mongooseUrl, {useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect(mongooseUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 const db = mongoose.connection
 db.on('error', (error: any) => {
   console.error(error)
